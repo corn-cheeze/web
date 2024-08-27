@@ -1,7 +1,8 @@
 const page = () => {
   return (
-    <div>
-      <h1>login</h1>
+    <div className="flex h-screen items-center justify-center">
+      <h1>LOGIN</h1>
+      <form></form>
     </div>
   );
 };
