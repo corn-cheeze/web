@@ -5,15 +5,15 @@ import { useRef } from "react";
 const page = () => {
   const idRef = useRef<HTMLInputElement>(null);
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    console.log("hi");
+  const handleBlur = () => {
+    if (idRef.current && idRef.current.value !== "") {
+      console.log(idRef.current.value);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (idRef.current) {
-      console.log(idRef.current.value);
-    }
+    console.log("제출");
   };
 
   return (
