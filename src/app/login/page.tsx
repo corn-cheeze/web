@@ -5,6 +5,10 @@ import { useRef } from "react";
 const page = () => {
   const idRef = useRef<HTMLInputElement>(null);
 
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    console.log("hi");
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (idRef.current) {
@@ -23,6 +27,7 @@ const page = () => {
               placeholder="아이디"
               className="h-12 rounded-xl border border-solid border-slate-300 pl-3"
               ref={idRef}
+              onBlur={handleBlur}
             />
             <input
               type="text"
