@@ -1,14 +1,23 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const page = () => {
+  const [id, setId] = useState("");
+  const [test, setTest] = useState(false);
   const idRef = useRef<HTMLInputElement>(null);
 
   const handleBlur = () => {
     if (idRef.current && idRef.current.value !== "") {
-      console.log(idRef.current.value);
+      setId(idRef.current.value);
+      handleTest();
     }
+  };
+
+  const handleTest = () => {
+    console.log(`hi ${id}`);
+    console.log(test);
+    id === "hi" && setTest(true);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -39,6 +48,7 @@ const page = () => {
             <input type="checkbox" />
             <label htmlFor="">로그인 상태 유지</label>
           </div>
+          {id === "hi" && <p>Warning</p>}
           <button className="h-12 rounded-xl bg-slate-500 text-white">
             로그인
           </button>
