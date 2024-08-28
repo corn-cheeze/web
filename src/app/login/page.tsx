@@ -1,14 +1,28 @@
+"use client";
+
+import { useRef } from "react";
+
 const page = () => {
+  const idRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (idRef.current) {
+      console.log(idRef.current.value);
+    }
+  };
+
   return (
     <main className="flex h-screen flex-col items-center justify-center">
       <div className="flex h-[400px] w-[400px] flex-col justify-center gap-6 rounded-3xl border border-solid border-slate-300 px-6">
         <h1 className="text-center">LOGIN</h1>
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4">
             <input
               type="text"
               placeholder="아이디"
               className="h-12 rounded-xl border border-solid border-slate-300 pl-3"
+              ref={idRef}
             />
             <input
               type="text"
