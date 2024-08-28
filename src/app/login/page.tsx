@@ -27,7 +27,7 @@ const page = () => {
 
   return (
     <main className="flex h-screen flex-col items-center justify-center">
-      <div className="flex h-[400px] w-[400px] flex-col justify-center gap-6 rounded-3xl border border-solid border-slate-300 px-6">
+      <div className="flex w-[400px] flex-col justify-center gap-6 rounded-3xl border border-solid border-slate-300 px-6 py-12">
         <h1 className="text-center">LOGIN</h1>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4">
