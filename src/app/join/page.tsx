@@ -1,4 +1,30 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 const page = () => {
+  const [id, setId] = useState("");
+  const idRef = useRef<HTMLInputElement>(null);
+
+  const handleBlur = () => {
+    if (idRef.current) {
+      const idValue = idRef.current.value;
+      if (idValue !== "") {
+        setId(idValue);
+        isValidId(idValue);
+      }
+    }
+  };
+
+  const isValidId = (idValue: string) => {
+    const regex = /^(?=[a-z0-9-_]{5,20}$)(?=.*[a-z])[a-z0-9-_]{5,20}$/; // 5~20자, 소문자 하나는 반드시 포함, 숫자/-/_ 는 선택적
+    if (!regex.test(idValue)) {
+      console.log("id is not valid");
+    } else {
+      console.log("id is valid");
+    }
+  };
+
   return (
     <main className="flex h-screen flex-col items-center justify-center">
       <div className="flex w-[400px] flex-col justify-center gap-6 rounded-3xl border border-solid border-slate-300 px-6 py-12">
@@ -8,6 +34,8 @@ const page = () => {
             <input
               type="text"
               placeholder="아이디"
+              ref={idRef}
+              onBlur={handleBlur}
               className="h-12 rounded-xl border border-solid border-slate-300 pl-3"
             />
             <input

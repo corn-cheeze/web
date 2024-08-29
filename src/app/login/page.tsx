@@ -34,9 +34,9 @@ const page = () => {
             <input
               type="text"
               placeholder="아이디"
-              className="h-12 rounded-xl border border-solid border-slate-300 pl-3"
               ref={idRef}
               onBlur={handleBlur}
+              className="h-12 rounded-xl border border-solid border-slate-300 pl-3"
             />
             <input
               type="text"
