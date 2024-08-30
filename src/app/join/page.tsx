@@ -1,30 +1,46 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 
 const page = () => {
   const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
   const [idIsValid, setIdIsValid] = useState(true);
+  const [pwIsValid, setPwIsValid] = useState(true);
   const idRef = useRef<HTMLInputElement>(null);
+  const pwRef = useRef<HTMLInputElement>(null);
 
-  const handleBlur = () => {
-    if (idRef.current) {
-      const idValue = idRef.current.value;
-      if (idValue !== "") {
-        setId(idValue);
-        isValidId(idValue);
+  const handleBlur = (ref: RefObject<HTMLInputElement>) => {
+    if (ref.current) {
+      const refValue = ref.current.value;
+      if (refValue !== "") {
+        setId(refValue);
+        if (ref === idRef) {
+          isValidId(refValue);
+        } else {
+          console.log("hi");
+          isValidPw(refValue);
+        }
       }
     }
   };
 
   const isValidId = (idValue: string) => {
-    const regex = /^(?=[a-z0-9-_]{5,20}$)(?=.*[a-z])[a-z0-9-_]{5,20}$/; // 5~20자, 소문자 하나는 반드시 포함, 숫자/-/_ 는 선택적
+    const regex = /^(?=.*[a-z])[a-z0-9-_]{5,20}$/; // 5~20자, 소문자 하나는 반드시 포함, 숫자/-/_ 는 선택적
     if (!regex.test(idValue)) {
-      console.log("id is invalid");
       setIdIsValid(false);
     } else {
-      console.log("id is valid");
       setIdIsValid(true);
+    }
+  };
+
+  const isValidPw = (pwValue: string) => {
+    const regex =
+      /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&_\-])[A-Za-z\d@$!%*?&_\-]{8,16}$/; // 8~16자, 소문자, 숫자, 특수문자 반드시 포함, 대문자는 선택적
+    if (!regex.test(pwValue)) {
+      setPwIsValid(false);
+    } else {
+      setPwIsValid(true);
     }
   };
 
@@ -38,12 +54,14 @@ const page = () => {
               type="text"
               placeholder="아이디"
               ref={idRef}
-              onBlur={handleBlur}
+              onBlur={() => handleBlur(idRef)}
               className="h-12 rounded-xl border border-solid border-slate-300 pl-3"
             />
             <input
-              type="text"
+              type="password"
               placeholder="비밀번호"
+              ref={pwRef}
+              onBlur={() => handleBlur(pwRef)}
               className="h-12 rounded-xl border border-solid border-slate-300 pl-3"
             />
             <input
@@ -57,6 +75,12 @@ const page = () => {
               <p>
                 아이디 : 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
                 가능합니다.
+              </p>
+            )}
+            {!pwIsValid && (
+              <p>
+                비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해
+                주세요.
               </p>
             )}
           </section>
