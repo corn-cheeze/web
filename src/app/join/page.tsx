@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 const page = () => {
   const [id, setId] = useState("");
+  const [idIsValid, setIdIsValid] = useState(true);
   const idRef = useRef<HTMLInputElement>(null);
 
   const handleBlur = () => {
@@ -19,9 +20,11 @@ const page = () => {
   const isValidId = (idValue: string) => {
     const regex = /^(?=[a-z0-9-_]{5,20}$)(?=.*[a-z])[a-z0-9-_]{5,20}$/; // 5~20자, 소문자 하나는 반드시 포함, 숫자/-/_ 는 선택적
     if (!regex.test(idValue)) {
-      console.log("id is not valid");
+      console.log("id is invalid");
+      setIdIsValid(false);
     } else {
       console.log("id is valid");
+      setIdIsValid(true);
     }
   };
 
@@ -49,6 +52,14 @@ const page = () => {
               className="h-12 rounded-xl border border-solid border-slate-300 pl-3"
             />
           </div>
+          <section>
+            {!idIsValid && (
+              <p>
+                아이디 : 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
+                가능합니다.
+              </p>
+            )}
+          </section>
           <section>
             <article>
               <label>
