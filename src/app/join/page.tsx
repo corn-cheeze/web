@@ -1,6 +1,6 @@
 "use client";
 
-import { RefObject, useEffect, useRef, useState } from "react";
+import { RefObject, useRef, useState } from "react";
 
 const page = () => {
   const [id, setId] = useState("");
@@ -14,32 +14,25 @@ const page = () => {
     const refValue = ref.current?.value;
 
     if (refValue) {
+      const ID_REGEX = /^(?=.*[a-z])[a-z0-9-_]{5,20}$/; // 5~20자, 소문자 하나는 반드시 포함, 숫자/-/_ 는 선택적
+      const PW_REGEX =
+        /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&_\-])[A-Za-z\d@$!%*?&_\-]{8,16}$/; // 8~16자, 소문자, 숫자, 특수문자 반드시 포함, 대문자는 선택적
+
       if (ref === idRef) {
         setId(refValue);
-        isValidId(refValue);
+        isValidValue(refValue, ID_REGEX, true);
       } else {
         setPw(refValue);
-        isValidPw(refValue);
+        isValidValue(refValue, PW_REGEX, false);
       }
     }
   };
 
-  const isValidId = (idValue: string) => {
-    const regex = /^(?=.*[a-z])[a-z0-9-_]{5,20}$/; // 5~20자, 소문자 하나는 반드시 포함, 숫자/-/_ 는 선택적
+  const isValidValue = (idValue: string, regex: RegExp, isId: boolean) => {
     if (!regex.test(idValue)) {
-      setIdIsValid(false);
+      isId ? setIdIsValid(false) : setPwIsValid(false);
     } else {
-      setIdIsValid(true);
-    }
-  };
-
-  const isValidPw = (pwValue: string) => {
-    const regex =
-      /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&_\-])[A-Za-z\d@$!%*?&_\-]{8,16}$/; // 8~16자, 소문자, 숫자, 특수문자 반드시 포함, 대문자는 선택적
-    if (!regex.test(pwValue)) {
-      setPwIsValid(false);
-    } else {
-      setPwIsValid(true);
+      isId ? setIdIsValid(true) : setPwIsValid(true);
     }
   };
 
