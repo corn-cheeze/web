@@ -11,16 +11,15 @@ const page = () => {
   const pwRef = useRef<HTMLInputElement>(null);
 
   const handleBlur = (ref: RefObject<HTMLInputElement>) => {
-    if (ref.current) {
-      const refValue = ref.current.value;
-      if (refValue !== "") {
+    const refValue = ref.current?.value;
+
+    if (refValue) {
+      if (ref === idRef) {
         setId(refValue);
-        if (ref === idRef) {
-          isValidId(refValue);
-        } else {
-          console.log("hi");
-          isValidPw(refValue);
-        }
+        isValidId(refValue);
+      } else {
+        setPw(refValue);
+        isValidPw(refValue);
       }
     }
   };
