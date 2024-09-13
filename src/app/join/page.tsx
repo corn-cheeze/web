@@ -5,10 +5,13 @@ import { RefObject, useRef, useState } from "react";
 const page = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const [pwCheck, setPwCheck] = useState("");
   const [idIsValid, setIdIsValid] = useState(true);
   const [pwIsValid, setPwIsValid] = useState(true);
+  const [pwCheckIsValid, setPwCheckIsValid] = useState(true);
   const idRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
+  const pwCheckRef = useRef<HTMLInputElement>(null);
 
   const handleBlur = (ref: RefObject<HTMLInputElement>) => {
     const refValue = ref.current?.value;
@@ -21,9 +24,12 @@ const page = () => {
       if (ref === idRef) {
         setId(refValue);
         isValidValue(refValue, ID_REGEX, true);
-      } else {
+      } else if (ref === pwRef) {
         setPw(refValue);
         isValidValue(refValue, PW_REGEX, false);
+      } else {
+        setPwCheck(refValue);
+        pw === pwCheck ? setPwCheckIsValid(true) : setPwCheckIsValid(false);
       }
     }
   };
@@ -36,67 +42,59 @@ const page = () => {
     }
   };
 
+  const handleJoin = () => {};
+
   return (
     <main className="flex h-screen flex-col items-center justify-center">
-      <div className="flex w-[400px] flex-col justify-center gap-6 rounded-3xl border border-solid border-slate-300 px-6 py-12">
-        <h1 className="text-center">JOIN</h1>
-        <form className="flex flex-col gap-4">
-          <div className="flex flex-col gap-4">
+      <div className="flex w-[420px] flex-col justify-center gap-12 rounded-lg bg-white px-6 py-12 drop-shadow-xl">
+        <h1 className="text-pointColor1 text-center text-3xl font-black">
+          CORNCHEEZE
+        </h1>
+        <form onSubmit={handleJoin} className="flex flex-col gap-4">
+          <section className="flex flex-col gap-4">
             <input
               type="text"
               placeholder="아이디"
               ref={idRef}
               onBlur={() => handleBlur(idRef)}
-              className="h-12 rounded-xl border border-solid border-slate-300 pl-3"
+              className="border-rightGray placeholder-rightGray focus:outline-mainColor h-14 rounded-sm border border-solid pl-3"
             />
             <input
               type="password"
               placeholder="비밀번호"
               ref={pwRef}
               onBlur={() => handleBlur(pwRef)}
-              className="h-12 rounded-xl border border-solid border-slate-300 pl-3"
+              className="border-rightGray placeholder-rightGray focus:outline-mainColor h-14 rounded-sm border border-solid pl-3"
             />
             <input
               type="text"
               placeholder="비밀번호 확인"
-              className="h-12 rounded-xl border border-solid border-slate-300 pl-3"
+              ref={pwCheckRef}
+              onBlur={() => handleBlur(pwCheckRef)}
+              className="border-rightGray placeholder-rightGray focus:outline-mainColor h-14 rounded-sm border border-solid pl-3"
             />
-          </div>
-          <section>
+          </section>
+          <section className="text-pointColor2 flex flex-col gap-2 text-xs">
             {!idIsValid && (
               <p>
-                아이디 : 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
+                ･ 아이디 : 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
                 가능합니다.
               </p>
             )}
             {!pwIsValid && (
               <p>
-                비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해
+                ･ 비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해
+                주세요.
+              </p>
+            )}
+            {!pwCheckIsValid && (
+              <p>
+                ･ 비밀번호 확인: 비밀번호가 일치하지 않습니다. 다시 입력해
                 주세요.
               </p>
             )}
           </section>
-          <section>
-            <article>
-              <label>
-                <input type="checkbox" />
-                <span>[필수]</span> 000 이용 약관
-              </label>
-              <p className="h-28 rounded-xl border border-solid border-slate-300"></p>
-            </article>
-            <article>
-              <label>
-                <input type="checkbox" />
-                <span>[필수]</span> 000 이용 약관
-              </label>
-              <p className="h-28 rounded-xl border border-solid border-slate-300"></p>
-            </article>
-            <label>
-              <input type="checkbox" />
-              전체 동의하기
-            </label>
-          </section>
-          <button className="h-12 rounded-xl bg-slate-500 text-white">
+          <button className="bg-mainColor h-12 rounded-sm font-bold tracking-wider text-white">
             회원가입
           </button>
         </form>

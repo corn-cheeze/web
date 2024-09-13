@@ -27,7 +27,7 @@ const page = () => {
 
   return (
     <main className="flex h-screen flex-col items-center justify-center">
-      <div className="flex w-[400px] flex-col justify-center gap-6 rounded-3xl border border-solid border-slate-300 px-6 py-12">
+      <div className="flex w-[400px] flex-col justify-center gap-6 rounded-3xl border border-solid border-[#FFA723] px-6 py-12">
         <h1 className="text-center">LOGIN</h1>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4">
@@ -49,7 +49,7 @@ const page = () => {
             <label htmlFor="">로그인 상태 유지</label>
           </div>
           {id === "hi" && <p>Warning</p>}
-          <button className="h-12 rounded-xl bg-slate-500 text-white">
+          <button className="h-12 rounded-xl bg-[#FFA723] text-white">
             로그인
           </button>
         </form>
