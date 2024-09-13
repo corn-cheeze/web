@@ -38,7 +38,7 @@ const page = () => {
 
   return (
     <main className="flex h-screen flex-col items-center justify-center">
-      <div className="flex w-[400px] flex-col justify-center gap-6 rounded-3xl bg-white px-6 py-12 drop-shadow-xl">
+      <div className="flex w-[400px] flex-col justify-center gap-6 rounded-lg bg-white px-6 py-12 drop-shadow-xl">
         <h1 className="text-center text-3xl font-black">JOIN</h1>
         <form className="flex flex-col gap-4">
           <div className="flex flex-col gap-4">
@@ -47,19 +47,19 @@ const page = () => {
               placeholder="아이디"
               ref={idRef}
               onBlur={() => handleBlur(idRef)}
-              className="border-rightGray placeholder-rightGray h-12 rounded-xl border border-solid pl-3"
+              className="border-rightGray placeholder-rightGray h-12 rounded-sm border border-solid pl-3"
             />
             <input
               type="password"
               placeholder="비밀번호"
               ref={pwRef}
               onBlur={() => handleBlur(pwRef)}
-              className="border-rightGray placeholder-rightGray h-12 rounded-xl border border-solid pl-3"
+              className="border-rightGray placeholder-rightGray h-12 rounded-sm border border-solid pl-3"
             />
             <input
               type="text"
               placeholder="비밀번호 확인"
-              className="border-rightGray placeholder-rightGray h-12 rounded-xl border border-solid pl-3"
+              className="border-rightGray placeholder-rightGray h-12 rounded-sm border border-solid pl-3"
             />
           </div>
           <section>
@@ -76,7 +76,7 @@ const page = () => {
               </p>
             )}
           </section>
-          <button className="bg-mainColor h-12 rounded-xl font-bold tracking-wider text-white">
+          <button className="bg-mainColor h-12 rounded-sm font-bold tracking-wider text-white">
             회원가입
           </button>
         </form>
