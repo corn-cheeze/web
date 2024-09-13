@@ -9,10 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        mainColor: "#FFC223",
+        mainColor: "#ffC223",
         // black: "#121212",
-        black: "#14181E",
-        rightGray: "D9D9D9",
+        black: "#14181e",
+        rightGray: "#d9d9d9",
       },
     },
   },

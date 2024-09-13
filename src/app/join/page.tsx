@@ -47,19 +47,19 @@ const page = () => {
               placeholder="아이디"
               ref={idRef}
               onBlur={() => handleBlur(idRef)}
-              className="border-rightGray h-12 rounded-xl border border-solid pl-3"
+              className="border-rightGray placeholder-rightGray h-12 rounded-xl border border-solid pl-3"
             />
             <input
               type="password"
               placeholder="비밀번호"
               ref={pwRef}
               onBlur={() => handleBlur(pwRef)}
-              className="border-rightGray h-12 rounded-xl border border-solid pl-3"
+              className="border-rightGray placeholder-rightGray h-12 rounded-xl border border-solid pl-3"
             />
             <input
               type="text"
               placeholder="비밀번호 확인"
-              className="border-rightGray h-12 rounded-xl border border-solid pl-3"
+              className="border-rightGray placeholder-rightGray h-12 rounded-xl border border-solid pl-3"
             />
           </div>
           <section>
