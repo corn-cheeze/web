@@ -1,6 +1,6 @@
 "use client";
 
-import { RefObject, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 
 const page = () => {
   const [id, setId] = useState("");
@@ -12,6 +12,10 @@ const page = () => {
   const idRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
   const pwCheckRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    pw === pwCheck ? setPwCheckIsValid(true) : setPwCheckIsValid(false);
+  }, [pwCheck]);
 
   const handleBlur = (ref: RefObject<HTMLInputElement>) => {
     const refValue = ref.current?.value;
@@ -29,7 +33,6 @@ const page = () => {
         isValidValue(refValue, PW_REGEX, false);
       } else {
         setPwCheck(refValue);
-        pw === pwCheck ? setPwCheckIsValid(true) : setPwCheckIsValid(false);
       }
     }
   };
@@ -67,7 +70,7 @@ const page = () => {
               className="border-rightGray placeholder-rightGray focus:outline-mainColor h-14 rounded-sm border border-solid pl-3"
             />
             <input
-              type="text"
+              type="password"
               placeholder="비밀번호 확인"
               ref={pwCheckRef}
               onBlur={() => handleBlur(pwCheckRef)}
