@@ -9,6 +9,9 @@ const page = () => {
   const [idIsValid, setIdIsValid] = useState(true);
   const [pwIsValid, setPwIsValid] = useState(true);
   const [pwCheckIsValid, setPwCheckIsValid] = useState(true);
+  const [idIsEnterd, setIdIsEnterd] = useState(true);
+  const [pwIsEnterd, setPwIsEnterd] = useState(true);
+  const [pwCheckIsEnterd, setPwCheckIsEnterd] = useState(true);
   const idRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
   const pwCheckRef = useRef<HTMLInputElement>(null);
@@ -26,13 +29,24 @@ const page = () => {
         /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&_\-])[A-Za-z\d@$!%*?&_\-]{8,16}$/; // 8~16자, 소문자, 숫자, 특수문자 반드시 포함, 대문자는 선택적
 
       if (ref === idRef) {
+        setIdIsEnterd(true);
         setId(refValue);
         isValidValue(refValue, ID_REGEX, true);
       } else if (ref === pwRef) {
+        setPwIsEnterd(true);
         setPw(refValue);
         isValidValue(refValue, PW_REGEX, false);
       } else {
+        setPwCheckIsEnterd(true);
         setPwCheck(refValue);
+      }
+    } else {
+      if (ref === idRef) {
+        setIdIsEnterd(false);
+      } else if (ref === pwRef) {
+        setPwIsEnterd(false);
+      } else {
+        setPwCheckIsEnterd(false);
       }
     }
   };
@@ -50,9 +64,9 @@ const page = () => {
     const ARE_ALL_VALUES_ENTERED = !!id && !!pw && !!pwCheck;
     const ARE_ALL_VALUES_VALID = idIsValid && pwIsValid && pwCheckIsValid;
 
-    !id && setIdIsValid(false);
-    !pw && setPwIsValid(false);
-    !pwCheck && setPwCheckIsValid(false);
+    !id && setIdIsEnterd(false);
+    !pw && setPwIsEnterd(false);
+    !pwCheck && setPwCheckIsEnterd(false);
 
     ARE_ALL_VALUES_ENTERED && ARE_ALL_VALUES_VALID && console.log("hi");
   };
@@ -88,19 +102,22 @@ const page = () => {
             />
           </section>
           <section className="text-pointColor2 flex flex-col gap-2 text-xs">
-            {!idIsValid && (
+            {!idIsEnterd && <p>･ 아이디 : 필수 정보입니다.</p>}
+            {idIsEnterd && !idIsValid && (
               <p>
                 ･ 아이디 : 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
                 가능합니다.
               </p>
             )}
-            {!pwIsValid && (
+            {!pwIsEnterd && <p>･ 비밀번호 : 필수 정보입니다.</p>}
+            {pwIsEnterd && !pwIsValid && (
               <p>
                 ･ 비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해
                 주세요.
               </p>
             )}
-            {!pwCheckIsValid && (
+            {!pwCheckIsEnterd && <p>･ 비밀번호 확인 : 필수 정보입니다.</p>}
+            {pwCheckIsEnterd && !pwCheckIsValid && (
               <p>
                 ･ 비밀번호 확인: 비밀번호가 일치하지 않습니다. 다시 입력해
                 주세요.
