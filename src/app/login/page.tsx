@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 const page = () => {
   const [id, setId] = useState("");
   const [test, setTest] = useState(false);
+  const [stayLogin, setStayLogin] = useState(false);
   const idRef = useRef<HTMLInputElement>(null);
 
   const handleBlur = () => {
@@ -18,6 +19,10 @@ const page = () => {
     console.log(`hi ${id}`);
     console.log(test);
     id === "hi" && setTest(true);
+  };
+
+  const handleStayLogin = () => {
+    setStayLogin(!stayLogin);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -46,16 +51,21 @@ const page = () => {
               className="border-rightGray placeholder-rightGray focus:outline-mainColor h-14 rounded-sm border border-solid pl-3"
             />
           </div>
-          <div className="flex gap-2 pb-2 text-slate-400">
-            <input type="checkbox" />
-            <label htmlFor="">로그인 상태 유지</label>
-          </div>
+          <label className="text-gray flex items-center gap-2 pb-2">
+            <input
+              type="checkbox"
+              checked={stayLogin}
+              onChange={handleStayLogin}
+              className="border-gray checked:bg-mainColor h-5 w-5 appearance-none rounded-full border border-solid checked:border-none"
+            />
+            로그인 상태 유지
+          </label>
           {id === "hi" && <p>Warning</p>}
           <button className="bg-mainColor h-12 rounded-sm font-bold tracking-wider text-white">
             로그인
           </button>
         </form>
-        <section className="flex justify-between text-slate-400">
+        <section className="text-gray flex justify-between">
           <button>회원가입</button>
           <div className="flex gap-4">
             <button>아이디 찾기</button>

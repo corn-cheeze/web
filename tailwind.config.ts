@@ -9,10 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        mainColor: "#ffC223",
+        mainColor: "#ffc223",
         pointColor1: "#8d4c00",
         pointColor2: "#e30000",
         rightGray: "#d9d9d9",
+        gray: "#aaaaaa",
         black: "#14181e",
         // black: "#121212",
       },
