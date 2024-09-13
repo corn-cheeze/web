@@ -38,12 +38,15 @@ const page = () => {
 
   return (
     <main className="flex h-screen flex-col items-center justify-center">
-      <div className="flex w-[420px] flex-col justify-center gap-6 rounded-lg bg-white px-6 py-12 drop-shadow-xl">
-        <h1 className="text-center text-3xl font-black">JOIN</h1>
+      <div className="flex w-[420px] flex-col justify-center gap-12 rounded-lg bg-white px-6 py-12 drop-shadow-xl">
+        <h1 className="text-pointColor1 text-center text-3xl font-black">
+          CORNCHEEZE
+        </h1>
         <form className="flex flex-col gap-4">
           <section className="flex flex-col gap-4">
             <input
               type="text"
+              value={id}
               placeholder="아이디"
               ref={idRef}
               onBlur={() => handleBlur(idRef)}
@@ -51,6 +54,7 @@ const page = () => {
             />
             <input
               type="password"
+              value={pw}
               placeholder="비밀번호"
               ref={pwRef}
               onBlur={() => handleBlur(pwRef)}
@@ -62,7 +66,7 @@ const page = () => {
               className="border-rightGray placeholder-rightGray focus:outline-mainColor h-14 rounded-sm border border-solid pl-3"
             />
           </section>
-          <section className="text-red flex flex-col gap-2 text-xs">
+          <section className="text-pointColor2 flex flex-col gap-2 text-xs">
             {!idIsValid && (
               <p>
                 ･ 아이디 : 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
