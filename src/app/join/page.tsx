@@ -41,7 +41,7 @@ const page = () => {
       <div className="flex w-[420px] flex-col justify-center gap-6 rounded-lg bg-white px-6 py-12 drop-shadow-xl">
         <h1 className="text-center text-3xl font-black">JOIN</h1>
         <form className="flex flex-col gap-4">
-          <div className="flex flex-col gap-4">
+          <section className="flex flex-col gap-4">
             <input
               type="text"
               placeholder="아이디"
@@ -61,17 +61,17 @@ const page = () => {
               placeholder="비밀번호 확인"
               className="border-rightGray placeholder-rightGray focus:outline-mainColor h-14 rounded-sm border border-solid pl-3"
             />
-          </div>
-          <section>
+          </section>
+          <section className="text-red flex flex-col gap-2 text-xs">
             {!idIsValid && (
               <p>
-                아이디 : 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
+                ･ 아이디 : 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
                 가능합니다.
               </p>
             )}
             {!pwIsValid && (
               <p>
-                비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해
+                ･ 비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해
                 주세요.
               </p>
             )}

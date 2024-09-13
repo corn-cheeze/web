@@ -10,9 +10,10 @@ const config: Config = {
     extend: {
       colors: {
         mainColor: "#ffC223",
-        // black: "#121212",
-        black: "#14181e",
+        red: "#e30000",
         rightGray: "#d9d9d9",
+        black: "#14181e",
+        // black: "#121212",
       },
       dropShadow: {
         xl: "5px 5px 10px rgba(217, 217, 217, 0.8)",
