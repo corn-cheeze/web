@@ -76,26 +76,6 @@ const page = () => {
               </p>
             )}
           </section>
-          <section>
-            <article>
-              <label>
-                <input type="checkbox" />
-                <span>[필수]</span> 000 이용 약관
-              </label>
-              <p className="h-28 rounded-xl border border-solid border-slate-300"></p>
-            </article>
-            <article>
-              <label>
-                <input type="checkbox" />
-                <span>[필수]</span> 000 이용 약관
-              </label>
-              <p className="h-28 rounded-xl border border-solid border-slate-300"></p>
-            </article>
-            <label>
-              <input type="checkbox" />
-              전체 동의하기
-            </label>
-          </section>
           <button className="h-12 rounded-xl bg-slate-500 text-white">
             회원가입
           </button>
