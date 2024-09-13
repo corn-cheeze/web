@@ -5,10 +5,13 @@ import { RefObject, useRef, useState } from "react";
 const page = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const [pwCheck, setPwCheck] = useState("");
   const [idIsValid, setIdIsValid] = useState(true);
   const [pwIsValid, setPwIsValid] = useState(true);
+  const [pwCheckIsValid, setPwCheckIsValid] = useState(true);
   const idRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
+  const pwCheckRef = useRef<HTMLInputElement>(null);
 
   const handleBlur = (ref: RefObject<HTMLInputElement>) => {
     const refValue = ref.current?.value;
@@ -21,9 +24,12 @@ const page = () => {
       if (ref === idRef) {
         setId(refValue);
         isValidValue(refValue, ID_REGEX, true);
-      } else {
+      } else if (ref === pwRef) {
         setPw(refValue);
         isValidValue(refValue, PW_REGEX, false);
+      } else {
+        setPwCheck(refValue);
+        pw === pwCheck ? setPwCheckIsValid(true) : setPwCheckIsValid(false);
       }
     }
   };
@@ -36,17 +42,18 @@ const page = () => {
     }
   };
 
+  const handleJoin = () => {};
+
   return (
     <main className="flex h-screen flex-col items-center justify-center">
       <div className="flex w-[420px] flex-col justify-center gap-12 rounded-lg bg-white px-6 py-12 drop-shadow-xl">
         <h1 className="text-pointColor1 text-center text-3xl font-black">
           CORNCHEEZE
         </h1>
-        <form className="flex flex-col gap-4">
+        <form onSubmit={handleJoin} className="flex flex-col gap-4">
           <section className="flex flex-col gap-4">
             <input
               type="text"
-              value={id}
               placeholder="아이디"
               ref={idRef}
               onBlur={() => handleBlur(idRef)}
@@ -54,7 +61,6 @@ const page = () => {
             />
             <input
               type="password"
-              value={pw}
               placeholder="비밀번호"
               ref={pwRef}
               onBlur={() => handleBlur(pwRef)}
@@ -63,6 +69,8 @@ const page = () => {
             <input
               type="text"
               placeholder="비밀번호 확인"
+              ref={pwCheckRef}
+              onBlur={() => handleBlur(pwCheckRef)}
               className="border-rightGray placeholder-rightGray focus:outline-mainColor h-14 rounded-sm border border-solid pl-3"
             />
           </section>
@@ -76,6 +84,12 @@ const page = () => {
             {!pwIsValid && (
               <p>
                 ･ 비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해
+                주세요.
+              </p>
+            )}
+            {!pwCheckIsValid && (
+              <p>
+                ･ 비밀번호 확인: 비밀번호가 일치하지 않습니다. 다시 입력해
                 주세요.
               </p>
             )}
