@@ -18,7 +18,7 @@ const config: Config = {
         xl: "5px 5px 10px rgba(217, 217, 217, 0.8)",
       },
       borderRadius: {
-        sm: "0.65rem",
+        sm: "0.75rem",
         lg: "2rem",
       },
     },
