@@ -14,6 +14,9 @@ const config: Config = {
         black: "#14181e",
         rightGray: "#d9d9d9",
       },
+      dropShadow: {
+        xl: "5px 5px 10px rgba(217, 217, 217, 0.8)",
+      },
     },
   },
   plugins: [],
