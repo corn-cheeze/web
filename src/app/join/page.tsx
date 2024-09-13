@@ -45,7 +45,17 @@ const page = () => {
     }
   };
 
-  const handleJoin = () => {};
+  const handleJoin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const ARE_ALL_VALUES_ENTERED = !!id && !!pw && !!pwCheck;
+    const ARE_ALL_VALUES_VALID = idIsValid && pwIsValid && pwCheckIsValid;
+
+    !id && setIdIsValid(false);
+    !pw && setPwIsValid(false);
+    !pwCheck && setPwCheckIsValid(false);
+
+    ARE_ALL_VALUES_ENTERED && ARE_ALL_VALUES_VALID && console.log("hi");
+  };
 
   return (
     <main className="flex h-screen flex-col items-center justify-center">
