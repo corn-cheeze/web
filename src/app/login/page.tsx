@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useState } from "react";
 
 const page = () => {
@@ -66,7 +67,7 @@ const page = () => {
           </button>
         </form>
         <section className="text-gray flex justify-between">
-          <button>회원가입</button>
+          <Link href="join">회원가입</Link>
           <div className="flex gap-4">
             <button>아이디 찾기</button>
             <button>비밀번호 찾기</button>
