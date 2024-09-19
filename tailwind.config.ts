@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         mainColor: "#ffc223",
+        bgColor: "#ffdd86",
         pointColor1: "#8d4c00",
         pointColor2: "#e30000",
         rightGray: "#d9d9d9",
