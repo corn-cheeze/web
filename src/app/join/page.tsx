@@ -12,9 +12,6 @@ const page = () => {
   const [idIsEnterd, setIdIsEnterd] = useState(true);
   const [pwIsEnterd, setPwIsEnterd] = useState(true);
   const [pwCheckIsEnterd, setPwCheckIsEnterd] = useState(true);
-  // const idRef = useRef<HTMLInputElement>(null);
-  // const pwRef = useRef<HTMLInputElement>(null);
-  // const pwCheckRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     pw === pwCheck ? setPwCheckIsValid(true) : setPwCheckIsValid(false);
@@ -107,26 +104,35 @@ const page = () => {
             />
           </section>
           <section className="flex flex-col gap-2 text-xs text-pointColor2">
-            {!idIsEnterd && <p>･ 아이디 : 필수 정보입니다.</p>}
-            {idIsEnterd && !idIsValid && (
-              <p>
-                ･ 아이디 : 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
-                가능합니다.
-              </p>
+            {!idIsEnterd ? (
+              <p>･ 아이디 : 필수 정보입니다.</p>
+            ) : (
+              !idIsValid && (
+                <p>
+                  ･ 아이디 : 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용
+                  가능합니다.
+                </p>
+              )
             )}
-            {!pwIsEnterd && <p>･ 비밀번호 : 필수 정보입니다.</p>}
-            {pwIsEnterd && !pwIsValid && (
-              <p>
-                ･ 비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해
-                주세요.
-              </p>
+            {!pwIsEnterd ? (
+              <p>･ 비밀번호 : 필수 정보입니다.</p>
+            ) : (
+              !pwIsValid && (
+                <p>
+                  ･ 비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해
+                  주세요.
+                </p>
+              )
             )}
-            {!pwCheckIsEnterd && <p>･ 비밀번호 확인 : 필수 정보입니다.</p>}
-            {pwCheckIsEnterd && !pwCheckIsValid && (
-              <p>
-                ･ 비밀번호 확인: 비밀번호가 일치하지 않습니다. 다시 입력해
-                주세요.
-              </p>
+            {!pwCheckIsEnterd ? (
+              <p>･ 비밀번호 확인 : 필수 정보입니다.</p>
+            ) : (
+              !pwCheckIsValid && (
+                <p>
+                  ･ 비밀번호 확인: 비밀번호가 일치하지 않습니다. 다시 입력해
+                  주세요.
+                </p>
+              )
             )}
           </section>
           <button className="h-12 rounded-sm bg-mainColor font-bold tracking-wider text-white">
