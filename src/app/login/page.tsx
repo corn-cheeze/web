@@ -6,15 +6,26 @@ import { useRef, useState } from "react";
 const page = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
+  const [idIsEnterd, setIdIsEnterd] = useState(true);
+  const [pwIsEnterd, setPwIsEnterd] = useState(true);
 
   const [test, setTest] = useState(false);
   const [stayLogin, setStayLogin] = useState(false);
 
-  const handleBlur = () => {
+  const handleValidation = (value: string, type: "id" | "pw") => {
     // if (idRef.current && idRef.current.value !== "") {
     //   setId(idRef.current.value);
     //   handleTest();
     // }
+    const isEntered = !!value;
+
+    if (type === "id") {
+      setId(value);
+      setIdIsEnterd(isEntered);
+    } else {
+      setPw(value);
+      setPwIsEnterd(isEntered);
+    }
   };
 
   const handleTest = () => {
@@ -44,14 +55,15 @@ const page = () => {
               type="text"
               value={id}
               placeholder="아이디"
-              onBlur={handleBlur}
+              onBlur={(e) => handleValidation(e.target.value, "id")}
               onChange={(e) => setId(e.target.value)}
               className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
             <input
-              type="text"
+              type="password"
               value={pw}
               placeholder="비밀번호"
+              onBlur={(e) => handleValidation(e.target.value, "pw")}
               onChange={(e) => setPw(e.target.value)}
               className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
@@ -65,11 +77,15 @@ const page = () => {
             />
             로그인 상태 유지
           </label>
-          {id === "hi" && <p>Warning</p>}
+          <section className="flex flex-col gap-2 text-xs text-pointColor2">
+            {!idIsEnterd && <p>아이디를 입력해 주세요.</p>}
+            {!pwIsEnterd && <p>비밀번호를 입력해 주세요.</p>}
+          </section>
           <button className="h-12 rounded-sm bg-mainColor font-bold tracking-wider text-white">
             로그인
           </button>
         </form>
+
         <section className="flex justify-between text-gray">
           <Link href="join">회원가입</Link>
           <div className="flex gap-4">
