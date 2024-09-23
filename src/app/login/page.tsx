@@ -9,14 +9,9 @@ const page = () => {
   const [idIsEnterd, setIdIsEnterd] = useState(true);
   const [pwIsEnterd, setPwIsEnterd] = useState(true);
 
-  const [test, setTest] = useState(false);
   const [stayLogin, setStayLogin] = useState(false);
 
   const handleValidation = (value: string, type: "id" | "pw") => {
-    // if (idRef.current && idRef.current.value !== "") {
-    //   setId(idRef.current.value);
-    //   handleTest();
-    // }
     const isEntered = !!value;
 
     if (type === "id") {
@@ -28,15 +23,10 @@ const page = () => {
     }
   };
 
-  const handleTest = () => {
-    console.log(`hi ${id}`);
-    console.log(test);
-    id === "hi" && setTest(true);
-  };
-
   const handleStayLogin = () => {
     setStayLogin(!stayLogin);
   };
+  console.log("로그인 상태", stayLogin ? "유지함" : "유지하지 않음");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
