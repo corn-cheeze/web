@@ -5,15 +5,16 @@ import { useRef, useState } from "react";
 
 const page = () => {
   const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
+
   const [test, setTest] = useState(false);
   const [stayLogin, setStayLogin] = useState(false);
-  const idRef = useRef<HTMLInputElement>(null);
 
   const handleBlur = () => {
-    if (idRef.current && idRef.current.value !== "") {
-      setId(idRef.current.value);
-      handleTest();
-    }
+    // if (idRef.current && idRef.current.value !== "") {
+    //   setId(idRef.current.value);
+    //   handleTest();
+    // }
   };
 
   const handleTest = () => {
@@ -41,14 +42,17 @@ const page = () => {
           <div className="flex flex-col gap-4">
             <input
               type="text"
+              value={id}
               placeholder="아이디"
-              ref={idRef}
               onBlur={handleBlur}
+              onChange={(e) => setId(e.target.value)}
               className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
             <input
               type="text"
+              value={pw}
               placeholder="비밀번호"
+              onChange={(e) => setPw(e.target.value)}
               className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
           </div>
