@@ -1,30 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const page = () => {
   const [id, setId] = useState("");
-  const [test, setTest] = useState(false);
+  const [pw, setPw] = useState("");
+  const [idIsEnterd, setIdIsEnterd] = useState(true);
+  const [pwIsEnterd, setPwIsEnterd] = useState(true);
+
   const [stayLogin, setStayLogin] = useState(false);
-  const idRef = useRef<HTMLInputElement>(null);
 
-  const handleBlur = () => {
-    if (idRef.current && idRef.current.value !== "") {
-      setId(idRef.current.value);
-      handleTest();
+  const handleValidate = (value: string, type: "id" | "pw") => {
+    const isEntered = !!value;
+
+    if (type === "id") {
+      setId(value);
+      setIdIsEnterd(isEntered);
+    } else {
+      setPw(value);
+      setPwIsEnterd(isEntered);
     }
-  };
-
-  const handleTest = () => {
-    console.log(`hi ${id}`);
-    console.log(test);
-    id === "hi" && setTest(true);
   };
 
   const handleStayLogin = () => {
     setStayLogin(!stayLogin);
   };
+  console.log("로그인 상태", stayLogin ? "유지함" : "유지하지 않음");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,14 +43,18 @@ const page = () => {
           <div className="flex flex-col gap-4">
             <input
               type="text"
+              value={id}
               placeholder="아이디"
-              ref={idRef}
-              onBlur={handleBlur}
+              onBlur={(e) => handleValidate(e.target.value, "id")}
+              onChange={(e) => setId(e.target.value)}
               className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
             <input
-              type="text"
+              type="password"
+              value={pw}
               placeholder="비밀번호"
+              onBlur={(e) => handleValidate(e.target.value, "pw")}
+              onChange={(e) => setPw(e.target.value)}
               className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
           </div>
@@ -61,11 +67,15 @@ const page = () => {
             />
             로그인 상태 유지
           </label>
-          {id === "hi" && <p>Warning</p>}
+          <section className="flex flex-col gap-2 text-xs text-pointColor2">
+            {!idIsEnterd && <p>아이디를 입력해 주세요.</p>}
+            {!pwIsEnterd && <p>비밀번호를 입력해 주세요.</p>}
+          </section>
           <button className="h-12 rounded-sm bg-mainColor font-bold tracking-wider text-white">
             로그인
           </button>
         </form>
+
         <section className="flex justify-between text-gray">
           <Link href="join">회원가입</Link>
           <div className="flex gap-4">
