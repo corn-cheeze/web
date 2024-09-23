@@ -1,6 +1,6 @@
 "use client";
 
-import { RefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const page = () => {
   const [id, setId] = useState("");
@@ -12,42 +12,40 @@ const page = () => {
   const [idIsEnterd, setIdIsEnterd] = useState(true);
   const [pwIsEnterd, setPwIsEnterd] = useState(true);
   const [pwCheckIsEnterd, setPwCheckIsEnterd] = useState(true);
-  const idRef = useRef<HTMLInputElement>(null);
-  const pwRef = useRef<HTMLInputElement>(null);
-  const pwCheckRef = useRef<HTMLInputElement>(null);
+  // const idRef = useRef<HTMLInputElement>(null);
+  // const pwRef = useRef<HTMLInputElement>(null);
+  // const pwCheckRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     pw === pwCheck ? setPwCheckIsValid(true) : setPwCheckIsValid(false);
   }, [pwCheck]);
 
-  const handleBlur = (ref: RefObject<HTMLInputElement>) => {
-    const refValue = ref.current?.value;
-
-    if (refValue) {
+  const handleValidation = (value: string, type: "id" | "pw" | "pwCheck") => {
+    if (value) {
       const ID_REGEX = /^(?=.*[a-z])[a-z0-9-_]{5,20}$/; // 5~20자, 소문자 하나는 반드시 포함, 숫자/-/_ 는 선택적
       const PW_REGEX =
         /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&_\-])[A-Za-z\d@$!%*?&_\-]{8,16}$/; // 8~16자, 소문자, 숫자, 특수문자 반드시 포함, 대문자는 선택적
 
-      if (ref === idRef) {
-        setIdIsEnterd(true);
-        setId(refValue);
-        isValidValue(refValue, ID_REGEX, true);
-      } else if (ref === pwRef) {
-        setPwIsEnterd(true);
-        setPw(refValue);
-        isValidValue(refValue, PW_REGEX, false);
-      } else {
-        setPwCheckIsEnterd(true);
-        setPwCheck(refValue);
-      }
-    } else {
-      if (ref === idRef) {
-        setIdIsEnterd(false);
-      } else if (ref === pwRef) {
-        setPwIsEnterd(false);
-      } else {
-        setPwCheckIsEnterd(false);
-      }
+      //   if (ref === idRef) {
+      //     setIdIsEnterd(true);
+      //     setId(refValue);
+      //     isValidValue(refValue, ID_REGEX, true);
+      //   } else if (ref === pwRef) {
+      //     setPwIsEnterd(true);
+      //     setPw(refValue);
+      //     isValidValue(refValue, PW_REGEX, false);
+      //   } else {
+      //     setPwCheckIsEnterd(true);
+      //     setPwCheck(refValue);
+      //   }
+      // } else {
+      //   if (ref === idRef) {
+      //     setIdIsEnterd(false);
+      //   } else if (ref === pwRef) {
+      //     setPwIsEnterd(false);
+      //   } else {
+      //     setPwCheckIsEnterd(false);
+      //   }
     }
   };
 
@@ -81,9 +79,10 @@ const page = () => {
           <section className="flex flex-col gap-4">
             <input
               type="text"
+              value={id}
               placeholder="아이디"
-              ref={idRef}
-              onBlur={() => handleBlur(idRef)}
+              onBlur={(e) => handleValidation(e.target.value, "id")}
+              onChange={(e) => setId(e.target.value)}
               className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
             <input
@@ -93,16 +92,17 @@ const page = () => {
             />
             <input
               type="password"
+              value={pw}
               placeholder="비밀번호"
-              ref={pwRef}
-              onBlur={() => handleBlur(pwRef)}
+              onBlur={(e) => handleValidation(e.target.value, "pw")}
+              onChange={(e) => setPw(e.target.value)}
               className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
             <input
               type="password"
               placeholder="비밀번호 확인"
-              ref={pwCheckRef}
-              onBlur={() => handleBlur(pwCheckRef)}
+              // ref={pwCheckRef}
+              // onBlur={() => handleBlur(pwCheckRef)}
               className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
           </section>
