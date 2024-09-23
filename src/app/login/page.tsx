@@ -11,7 +11,7 @@ const page = () => {
 
   const [stayLogin, setStayLogin] = useState(false);
 
-  const handleValidation = (value: string, type: "id" | "pw") => {
+  const handleValidate = (value: string, type: "id" | "pw") => {
     const isEntered = !!value;
 
     if (type === "id") {
@@ -45,7 +45,7 @@ const page = () => {
               type="text"
               value={id}
               placeholder="아이디"
-              onBlur={(e) => handleValidation(e.target.value, "id")}
+              onBlur={(e) => handleValidate(e.target.value, "id")}
               onChange={(e) => setId(e.target.value)}
               className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
@@ -53,7 +53,7 @@ const page = () => {
               type="password"
               value={pw}
               placeholder="비밀번호"
-              onBlur={(e) => handleValidation(e.target.value, "pw")}
+              onBlur={(e) => handleValidate(e.target.value, "pw")}
               onChange={(e) => setPw(e.target.value)}
               className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />

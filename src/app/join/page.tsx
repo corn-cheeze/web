@@ -6,9 +6,11 @@ const page = () => {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const [pwCheck, setPwCheck] = useState("");
+
   const [idIsValid, setIdIsValid] = useState(true);
   const [pwIsValid, setPwIsValid] = useState(true);
   const [pwCheckIsValid, setPwCheckIsValid] = useState(true);
+
   const [idIsEnterd, setIdIsEnterd] = useState(true);
   const [pwIsEnterd, setPwIsEnterd] = useState(true);
   const [pwCheckIsEnterd, setPwCheckIsEnterd] = useState(true);
@@ -18,40 +20,37 @@ const page = () => {
   }, [pwCheck]);
 
   const handleValidation = (value: string, type: "id" | "pw" | "pwCheck") => {
-    if (value) {
-      const ID_REGEX = /^(?=.*[a-z])[a-z0-9-_]{5,20}$/; // 5~20자, 소문자 하나는 반드시 포함, 숫자/-/_ 는 선택적
-      const PW_REGEX =
-        /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&_\-])[A-Za-z\d@$!%*?&_\-]{8,16}$/; // 8~16자, 소문자, 숫자, 특수문자 반드시 포함, 대문자는 선택적
+    const isEntered = !!value;
+    const ID_REGEX = /^(?=.*[a-z])[a-z0-9-_]{5,20}$/; // 5~20자, 소문자 하나는 반드시 포함, 숫자/-/_ 는 선택적
+    const PW_REGEX =
+      /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&_\-])[A-Za-z\d@$!%*?&_\-]{8,16}$/; // 8~16자, 소문자, 숫자, 특수문자 반드시 포함, 대문자는 선택적
 
-      //   if (ref === idRef) {
-      //     setIdIsEnterd(true);
-      //     setId(refValue);
-      //     isValidValue(refValue, ID_REGEX, true);
-      //   } else if (ref === pwRef) {
-      //     setPwIsEnterd(true);
-      //     setPw(refValue);
-      //     isValidValue(refValue, PW_REGEX, false);
-      //   } else {
-      //     setPwCheckIsEnterd(true);
-      //     setPwCheck(refValue);
-      //   }
-      // } else {
-      //   if (ref === idRef) {
-      //     setIdIsEnterd(false);
-      //   } else if (ref === pwRef) {
-      //     setPwIsEnterd(false);
-      //   } else {
-      //     setPwCheckIsEnterd(false);
-      //   }
+    switch (type) {
+      case "id":
+        setId(value);
+        setIdIsEnterd(isEntered);
+        handleValidate(value, ID_REGEX, setIdIsValid);
+        break;
+      case "pw":
+        setPw(value);
+        setPwIsEnterd(isEntered);
+        handleValidate(value, PW_REGEX, setPwIsValid);
+        break;
+      case "pwCheck":
+        setPwCheck(value);
+        setPwCheckIsEnterd(isEntered);
+        break;
+      default:
+        break;
     }
   };
 
-  const isValidValue = (idValue: string, regex: RegExp, isId: boolean) => {
-    if (!regex.test(idValue)) {
-      isId ? setIdIsValid(false) : setPwIsValid(false);
-    } else {
-      isId ? setIdIsValid(true) : setPwIsValid(true);
-    }
+  const handleValidate = (
+    value: string,
+    regex: RegExp,
+    setValidity: React.Dispatch<React.SetStateAction<boolean>>,
+  ) => {
+    setValidity(regex.test(value));
   };
 
   const handleJoin = (e: React.FormEvent<HTMLFormElement>) => {
@@ -98,8 +97,9 @@ const page = () => {
             <input
               type="password"
               placeholder="비밀번호 확인"
-              // ref={pwCheckRef}
+              value={pwCheck}
               // onBlur={() => handleBlur(pwCheckRef)}
+              onChange={(e) => setPwCheck(e.target.value)}
               className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
           </section>
