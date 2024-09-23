@@ -73,8 +73,8 @@ const page = () => {
 
   return (
     <main className="flex h-screen flex-col items-center justify-center">
-      <div className="flex w-[420px] flex-col justify-center gap-12 rounded-lg bg-white px-6 py-12 drop-shadow-xl">
-        <h1 className="text-pointColor1 text-center text-3xl font-black">
+      <div className="flex w-[420px] flex-col justify-center gap-12 rounded-lg border border-solid border-rightGray px-6 py-12">
+        <h1 className="text-center text-3xl font-black text-pointColor1">
           CORNCHEEZE
         </h1>
         <form onSubmit={handleJoin} className="flex flex-col gap-4">
@@ -84,24 +84,24 @@ const page = () => {
               placeholder="아이디"
               ref={idRef}
               onBlur={() => handleBlur(idRef)}
-              className="border-rightGray placeholder-rightGray focus:outline-mainColor h-14 rounded-sm border border-solid pl-3"
+              className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
             <input
               type="password"
               placeholder="비밀번호"
               ref={pwRef}
               onBlur={() => handleBlur(pwRef)}
-              className="border-rightGray placeholder-rightGray focus:outline-mainColor h-14 rounded-sm border border-solid pl-3"
+              className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
             <input
               type="password"
               placeholder="비밀번호 확인"
               ref={pwCheckRef}
               onBlur={() => handleBlur(pwCheckRef)}
-              className="border-rightGray placeholder-rightGray focus:outline-mainColor h-14 rounded-sm border border-solid pl-3"
+              className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
           </section>
-          <section className="text-pointColor2 flex flex-col gap-2 text-xs">
+          <section className="flex flex-col gap-2 text-xs text-pointColor2">
             {!idIsEnterd && <p>･ 아이디 : 필수 정보입니다.</p>}
             {idIsEnterd && !idIsValid && (
               <p>
@@ -124,7 +124,7 @@ const page = () => {
               </p>
             )}
           </section>
-          <button className="bg-mainColor h-12 rounded-sm font-bold tracking-wider text-white">
+          <button className="h-12 rounded-sm bg-mainColor font-bold tracking-wider text-white">
             회원가입
           </button>
         </form>
