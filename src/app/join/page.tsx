@@ -87,6 +87,11 @@ const page = () => {
               className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
             />
             <input
+              type="text"
+              placeholder="닉네임"
+              className="h-14 rounded-sm border border-solid border-rightGray pl-3 placeholder-rightGray focus:outline-mainColor"
+            />
+            <input
               type="password"
               placeholder="비밀번호"
               ref={pwRef}
