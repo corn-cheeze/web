@@ -9,7 +9,7 @@ export default function Home() {
 
   const load = async () => {
     try {
-      const response = await axios.get(MOCK_URL);
+      const response = await axios.get(`${MOCK_URL}/user`);
       setUserId(response.data[0].id);
     } catch (error) {
       console.log(error);

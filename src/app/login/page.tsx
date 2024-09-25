@@ -1,5 +1,7 @@
 "use client";
 
+import { MOCK_URL } from "@/server";
+import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -28,9 +30,19 @@ const page = () => {
   };
   console.log("로그인 상태", stayLogin ? "유지함" : "유지하지 않음");
 
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(`${MOCK_URL}/login`);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("제출");
+
+    handleLogin();
   };
 
   return (
