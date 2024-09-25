@@ -1,5 +1,7 @@
 "use client";
 
+import { MOCK_URL } from "@/server";
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 const page = () => {
@@ -65,7 +67,22 @@ const page = () => {
     setValidity(regex.test(value)); // 값별로 유효한지 체크
   };
 
-  const handleJoin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleJoin = async () => {
+    const data = {
+      id,
+      nickname,
+      pw,
+    };
+
+    try {
+      const response = await axios.post(`${MOCK_URL}/user`, data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const ARE_ALL_VALUES_ENTERED = !!id && !!nickname && !!pw && !!pwCheck;
@@ -80,6 +97,7 @@ const page = () => {
 
     if (ARE_ALL_VALUES_ENTERED && ARE_ALL_VALUES_VALID) {
       console.log("success");
+      handleJoin();
     }
   };
 
@@ -89,7 +107,7 @@ const page = () => {
         <h1 className="text-center text-3xl font-black text-pointColor1">
           CORNCHEEZE
         </h1>
-        <form onSubmit={handleJoin} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <section className="flex flex-col gap-4">
             <input
               type="text"
