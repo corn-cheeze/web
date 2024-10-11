@@ -50,6 +50,7 @@ const ReactModule = () => {
         <button className="ql-code-block" />
         <button className="ql-link" />
         <button className="ql-image" />
+        <button className="ql-video" />
       </div>
     </>
   );
@@ -72,6 +73,7 @@ const page = () => {
     "indent",
     "link",
     "image",
+    "video",
     "color",
     "background",
     "align",
@@ -95,11 +97,7 @@ const page = () => {
       <div id="toolBar">
         <ReactModule />
       </div>
-      <ReactQuill
-        // theme="snow"
-        modules={modules}
-        formats={formats}
-      />
+      <ReactQuill theme="snow" modules={modules} formats={formats} />
     </div>
   );
 };
